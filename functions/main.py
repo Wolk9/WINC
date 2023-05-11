@@ -29,4 +29,3 @@ def negative(x):
         return False
 
 print(negative(50))
-    
