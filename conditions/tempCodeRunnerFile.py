@@ -1,2 +1,1 @@
-
-    #     print("wait")
+cow_milking_status == 'true' and location_of_the_cows == "pasture"

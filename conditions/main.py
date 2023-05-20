@@ -4,103 +4,65 @@ __human_name__ = 'conditions'
 
 # Add your code after this line
 
-def farm_action(weather,time_of_day,cow_milking_status,location_cows,season,is_slurry_tank_full,is_grass_status_long):
-    if weather == 'rainy':
-        take_cow_to_cowshed = True
-        milk_cows = True
-        fertilize_pasture = True
-        mow_grass = False
-    elif weather == 'sunny':
-        take_cow_to_cowshed = True
-        milk_cows = True
-        fertilize_pasture = False
-        mow_grass = True
-    elif weather == 'windy':
-        take_cow_to_cowshed = True
-        milk_cows = True
-        fertilize_pasture = False
-        mow_grass = False
-    elif weather == 'neutral':
-        take_cow_to_cowshed = True
-        milk_cows = True
-        fertilize_pasture = True
-        mow_grass = False
-    else: 
-        take_cow_to_cowshed = False
-        milk_cows = False
-        fertilize_pasture = False
-        mow_grass = False
-
-    if time_of_day == 'day':
-        take_cow_to_cowshed = False
-        milk_cows = True
-        fertilize_pasture = True
-        mow_grass = True
-    elif time_of_day == 'night':
-        take_cow_to_cowshed = True
-        milk_cows = True
-        fertilize_pasture = True
-        mow_grass = True
-    else:
-        take_cow_to_cowshed = False
-        milk_cows = False
-        fertilize_pasture = False
-        mow_grass = False
-
+def farm_action(weather,time_of_day,cow_milking_status,location_of_the_cows,season,is_slurry_tank_full,is_grass_status_long):
+  
     if cow_milking_status == True:
-        milk_cows = True
-    elif cow_milking_status == False:
-        milk_cows = False
+        cow_milking_status_txt = "need milking"
     else:
-        milk_cows = False
-
-    if location_cows == 'cowshed':
-        take_cow_to_cowshed = False
-        fertilize_pasture = True
-        mow_grass = True  
-    elif location_cows == 'pasture':
-        take_cow_to_cowshed = True
-        fertilize_pasture = False
-        mow_grass = False
-    else:
-        take_cow_to_cowshed = False
-        mow_grass = False
-
-    if season == 'winter':
-        mow_grass = False
-    elif season == 'spring':
-        mow_grass = True
-    elif season == 'summer':
-        mow_grass = False    
-    elif season == 'fall':
-        mow_grass = False
-    else: 
-        mow_grass = False
+        cow_milking_status_txt = "don't need milking"
 
     if is_slurry_tank_full == True:
-        fertilize_pasture = True
-    else:
-        fertilize_pasture = False
-
-
+        is_slurry_tank_full_txt = "full"
+    else: 
+        is_slurry_tank_full_txt = "empty"
+    
     if is_grass_status_long == True:
-        mow_grass = True 
+        is_grass_status_long_txt = "long"
     else:
-        mow_grass = False
+        is_grass_status_long_txt = "short"
 
-    if take_cow_to_cowshed == True:
-        print("take cows to cowshed")
-    elif (milk_cows == True):
-        print("milk cows")
-    elif (fertilize_pasture == True):
-        print("fertilize pasture")
-    elif (mow_grass == True):
-        print("mow grass") 
+    x = "Good day!\nIn the " + season + " season, at " + time_of_day + " with a " + weather + " condition,\nand your cows " + cow_milking_status_txt + ",\ntheir at the "  + location_of_the_cows + ",\nyour slurry tank is " + is_slurry_tank_full_txt + ",\nand the grass is " + is_grass_status_long_txt + "\n\n\nThis is what you need to do:\n\n"
+
+    if time_of_day == 'night':
+        x = x + "take cows to cowshed because it is night\n"
+    elif weather == 'rainy':
+        x = x + "take cows to cowshed because it is raining\n"
+    elif cow_milking_status == True and location_of_the_cows == "pasture":
+        x = x + "take cows to cowshed because they need milking\n"
     else:
-        print("wait")
+         x = x + "let cows at pasture\n"
+        
+    if cow_milking_status == True:
+        x = x + "milk the cows\n"
+        if location_of_the_cows == "pasture":
+            x = x + "bring the cows back to the pasture\n"
+
+    
+    if is_slurry_tank_full == True and location_of_the_cows == "cowshed":
+        if weather == "neutral" or weather == "rainy":
+            x = x + "Fertilize pasture\n"
+        else: 
+            x = x + "It is " + weather + " now, you need other weather conditions to Fertilize your pasture\n"
+    elif is_slurry_tank_full == True and location_of_the_cows == "pasture":
+        if weather == "neutral" or weather == "rainy":
+            x = x + "take cows to cowshed to Fertilise the pasture\n"
+            x = x + "Fertilize pasture\n"
+        else:
+            x = x + "It is " + weather + " now, you need other weather conditions to Fertilize your pasture\n"
+ 
+    if is_grass_status_long == True and season == "spring" and weather == "sunny":
+        if location_of_the_cows == "pasture":
+            x = x + "take cows to cowshed so you can mow the grass\n"
+            x = x + "mow your grass"
+        else:
+            x = x + "mow your grass"
+              
+    return x
 
 
-print(farm_action('rainy', 'night', False, 'cowshed', 'winter', True, True))
+print(farm_action('rainy', 'night', False, 'cowshed', 'winter', True, False))
 print(farm_action('rainy', 'night', False, 'cowshed', 'winter', False, True))
-print(farm_action('windy', 'night', True, 'cowshed', 'winter', True, True))
+print(farm_action('windy', 'night', True, 'cowshed', 'winter', True, False))
 print(farm_action('sunny', 'day', True, 'pasture', 'spring', False, True))
+print(farm_action('sunny', 'day', True, 'pasture', 'spring', True, True))
+print(farm_action('sunny', 'day', True, 'cowshed', 'spring', True, True))
