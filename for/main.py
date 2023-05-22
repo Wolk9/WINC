@@ -9,11 +9,62 @@ __human_name__ = "for"
 
 """ Write your functions here. """
 
-def shortest_names(countries):
-    return
+def shortest_names(list):
+    p=10000
+    for element in list:
+        if len(element) < p:
+            s=[element]
+            p=len(element)
+        elif len(element) == p:
+            s.append(element)
+    return s
+        
 
-def most_vowels(countries):
-    return
+def most_vowels(list):
+    vowels=["A", "E", "I", "O", "U"]
+    country_vowels = []
+    for element in list:
+        vowelcount=0
+        
+        for character in element:
+               
+            for vowel in vowels:
+                if vowel.lower() == character.lower():
+                    vowelcount += 1
+        
+        print(str(element) + ": " + str(vowelcount))
+        
+        country_vowels.append({"country": element, "count": vowelcount})
+        
+        sorted_countrys_by_number_of_vowels = sorted(country_vowels, key=lambda d: d['count'], reverse=True)
+    
+    
+    unique_number_of_vowels = []
+    for number_of_vowels in sorted_countrys_by_number_of_vowels: 
+    
+        if number_of_vowels["count"] not in unique_number_of_vowels:
+    
+            unique_number_of_vowels.append(number_of_vowels["count"])
+    
+    print("unique number of vowels", unique_number_of_vowels)
+
+    top3 = range(0,2)
+    top3_number_of_vowels = []
+    for z in top3:
+    
+        for element in sorted_countrys_by_number_of_vowels:
+    
+            if element["count"] == unique_number_of_vowels[z]:
+    
+                top3_number_of_vowels.append((element["country"], element["count"]))
+            
+    
+    
+    print("Top 3", top3_number_of_vowels)
+    return top3_number_of_vowels
+
+
+    
 
 def alphabet_set(countries):
     return
@@ -27,3 +78,7 @@ if __name__ == "__main__":
     countries = get_countries()
 
     """ Write the calls to your functions here. """
+
+    print(shortest_names(countries))
+
+    print(str(most_vowels(countries)))
