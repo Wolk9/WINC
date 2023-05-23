@@ -67,8 +67,35 @@ def most_vowels(list):
     
 
 def alphabet_set(countries):
+
+    # Converteer de lijst met countries naar lowercase
+
+    # Maak een lijst aan met letters needed
+    letters_needed = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+    # Maak een lege lijst aan met landen die je gehad hebt
+    checked_countries = []
+    # Loop door alle landen heen
     
-    return
+    for country in countries:
+        country = country.lower()
+        # print("country to check: ", country)
+        for letter in country:
+            # print("letter in country to check: ", letter)
+            if letter in letters_needed:
+                # print("the " + letter + " is in letters needed list")
+                if country not in checked_countries:
+                    # print("country is not yet in list of checked countries, put it in")
+                    checked_countries.append(country)                    
+                index = letters_needed.index(letter)
+                letters_needed.pop(index)
+            # else:
+                #print("the " + letter + " is not in letters needed list (anymore)")
+        
+        # print("lijst van landen: " + str(checked_countries))
+        # print("lijst van letters: " + str(letters_needed))
+        # input("next: ")
+    
+    return checked_countries
 
 
 
@@ -80,6 +107,8 @@ if __name__ == "__main__":
 
     """ Write the calls to your functions here. """
 
-    print(shortest_names(countries))
+    # print(shortest_names(countries))
 
-    print("Top 3", str(most_vowels(countries)))
+    # print("Top 3", str(most_vowels(countries)))
+    
+    print(alphabet_set(countries))
