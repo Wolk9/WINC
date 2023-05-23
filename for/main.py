@@ -56,10 +56,10 @@ def most_vowels(list):
     
             if element["count"] == unique_number_of_vowels[z]:
     
-                top3_number_of_vowels.append((element["country"], element["count"]))
+                top3_number_of_vowels.append(str(element["country"]))
             
     
-    
+    print(top3_number_of_vowels)
     
     return top3_number_of_vowels
 
