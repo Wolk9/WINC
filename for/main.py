@@ -109,6 +109,6 @@ if __name__ == "__main__":
 
     # print(shortest_names(countries))
 
-    # print("Top 3", str(most_vowels(countries)))
+    print("Top 3", str(most_vowels(countries)))
     
     print(alphabet_set(countries))
