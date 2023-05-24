@@ -1,4 +1,5 @@
 from helpers import random_koala_fact
+import time 
 
 __winc_id__ = "c0dc6e00dfac46aab88296601c32669f"
 __human_name__ = "while"
@@ -12,13 +13,17 @@ def unique_koala_facts(number):
         if koala_fact not in unique_koala_facts:
             print(koala_fact + " staat er nog niet in!")
             unique_koala_facts.append(koala_fact)
+            time.sleep(1)
         else:
-            print("staat er in")
+            index = unique_koala_facts.index(koala_fact)
+            time.sleep(0.5)
+            print(koala_fact + "\nstaat er in op index: " + str(index) )
         number += -1
-        print(number)
+        print("\nnumber: ", number)
+        print("list: ", unique_koala_facts, "\n\n")
 
     
-    unique_koala_facts.sort()
+    #unique_koala_facts.sort()
     print(len(unique_koala_facts))
     return unique_koala_facts
 
@@ -36,4 +41,4 @@ def koala_weight(number):
 if __name__ == "__main__":
     print(random_koala_fact())
     
-    print(unique_koala_facts(15000))
+    print(unique_koala_facts(1000))
