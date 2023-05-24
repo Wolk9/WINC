@@ -48,7 +48,7 @@ def most_vowels(list):
     
     print("unique number of vowels", unique_number_of_vowels)
 
-    top3 = range(0,3)
+    top3 = range(0,2)
     top3_number_of_vowels = []
     for z in top3:
     
