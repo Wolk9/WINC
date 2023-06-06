@@ -30,10 +30,10 @@ def unique_koala_facts(number):
     print(len(unique_koala_facts))
     return unique_koala_facts
 
-def num_joey_facts(number):
+def num_joey_facts():
     return num_joey_facts
 
-def koala_weight(number):
+def koala_weight():
     return koala_weight
 
 
