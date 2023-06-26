@@ -30,24 +30,32 @@ def unique_koala_facts(number):
     print("we hebben nu ", len(unique_koala_facts), " unieke koala feiten")
     return unique_koala_facts
 
+
 def num_joey_facts():
-    koala_facts_with_joey = []
-    unique_koala_facts = []
-    fact = 0
-    number = 1000
-    
+    unique_joey_facts = set()
+    fact_counts = {}
 
-    while number > 0:
-        koala_fact = random_koala_fact();
-        if koala_fact not in koala_facts_with_joey:
-            if "joeys" in koala_fact:
-                koala_facts_with_joey.apped(koala_fact)
-            else:
-                fact += 1    
+    while True:
+        random_fact = random_koala_fact()
+
+        if random_fact in fact_counts:
+            fact_counts[random_fact] += 1
         else:
-            number -= 1
+            fact_counts[random_fact] = 1
 
+        # Check if a fact has been seen 10 times
+        if fact_counts[random_fact] == 10:
+            break
 
+        if 'joey' in random_fact:
+            unique_joey_facts.add(random_fact)
+
+    return len(unique_joey_facts)
+
+    unique_joey_count = count_unique_joey_facts()
+    print("Number of unique facts mentioning 'joey':", unique_joey_count)  
+
+    unique_joey_count = num_joey_facts
 
     return num_joey_facts
 
@@ -61,4 +69,5 @@ def koala_weight():
 # It is not run if you import this file as a module.
 if __name__ == "__main__":
     
-    print(unique_koala_facts(1000))
+   # print(unique_koala_facts(1000))
+    print(num_joey_facts())
