@@ -12,20 +12,25 @@ def greet(name, greeting_template='Hello, <name>!'):
 def force(mass, body='earth'):
     gravity_factors = {
         'mercury': 3.7,
-        'venus': 8.9,
+        'venus': 8.87,
         'earth': 9.8,
-        'mars': 3.7,
-        'jupiter': 23.1,
-        'saturn': 9.0,
-        'uranus': 8.7,
-        'neptune': 11.0,
-        'pluto': 0.7,
-        'moon': 1.6
+        'mars': 3.71,
+        'jupiter': 24.79,
+        'saturn': 10.44,
+        'uranus': 8.69,
+        'neptune': 11.15,
+        'pluto': 0.62,
+        'moon': 1.62
     }
-    gravity = gravity_factors[body]
-    force = round(mass * gravity, 1)
-
+    
+    if body.lower() in gravity_factors:
+        gravity = round(gravity_factors[body.lower()], 1)
+    else:
+        raise ValueError("Invalid body name.")
+    
+    force = mass * gravity
     return force
+
 
 
 def pull(m1, m2, d):
