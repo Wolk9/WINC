@@ -26,7 +26,7 @@ def force(mass, body='earth'):
     if body.lower() in gravity_factors:
         gravity = round(gravity_factors[body.lower()], 1)
     else:
-        raise ValueError("Invalid body name.")
+        raise ValueError("Verkeerde body naam.")
     
     force = mass * gravity
     return force
