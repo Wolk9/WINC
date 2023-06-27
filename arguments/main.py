@@ -26,8 +26,8 @@ def force(mass, body='earth'):
     if body.lower() in gravity_factors:
         gravity = round(gravity_factors[body.lower()], 1)
     else:
-        raise ValueError("Verkeerde body naam.")
-    
+        gravity = gravity_factors['earth']
+
     force = mass * gravity
     return force
 
@@ -36,4 +36,3 @@ def pull(m1, m2, d):
     gravitational_constant = 6.674e-11
     pull = gravitational_constant * ((m1 * m2) / (d ** 2))
     return pull
-
