@@ -7,6 +7,9 @@ import this
 import time
 import math
 from datetime import datetime
+import sys
+from greet import supergreeting
+
 
 
 
@@ -22,3 +25,11 @@ def iso_now():
     now = datetime.now()
     iso_format = now.strftime("%Y-%m-%dT%H:%M")
     return iso_format
+
+
+def platform():
+    return sys.platform
+
+
+def supergreeting_wrapper(name):
+    return supergreeting(name)
