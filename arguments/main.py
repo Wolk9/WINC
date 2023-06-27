@@ -32,7 +32,6 @@ def force(mass, body='earth'):
     return force
 
 
-
 def pull(m1, m2, d):
     gravitational_constant = 6.674e-11
     pull = gravitational_constant * ((m1 * m2) / (d ** 2))
