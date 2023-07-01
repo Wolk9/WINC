@@ -1,50 +1,69 @@
 __winc_id__ = "9920545368b24a06babf1b57cee44171"
 __human_name__ = "refactoring"
 
-alice_name = "Alice Aliceville"
-alice_profession = "electrician"
-bob_name = "Bob Bobsville"
-bob_profession = "painter"
-craig_name = "Craig Craigsville"
-craig_profession = "plumber"
 
-alfred_name = "Alfred Alfredson"
-alfred_address = "Alfredslane 123"
-alfred_needs = ["painter", "plumber"]
-bert_name = "Bert Bertson"
-bert_address = "Bertslane 231"
-bert_needs = ["plumber"]
-candice_name = "Candice Candicedottir"
-candice_address = "Candicelane 312"
-candice_needs = ["electrician", "painter"]
+class Homeowner:
+    def __init__(self, name, address):
+        self.name = name
+        self.address = address
+        self.contracts = []
 
-alfred_contracts = []
-for need in alfred_needs:
-    if need == alice_profession:
-        alfred_contracts.append(alice_name)
-    elif need == bob_profession:
-        alfred_contracts.append(bob_name)
-    elif need == craig_profession:
-        alfred_contracts.append(craig_name)
+    def add_contract(self, specialist):
+        if specialist.profession in self.needs:
+            self.contracts.append(specialist.name)
 
-bert_contracts = []
-for need in bert_needs:
-    if need == alice_profession:
-        bert_contracts.append(alice_name)
-    elif need == bob_profession:
-        bert_contracts.append(bob_name)
-    elif need == craig_profession:
-        bert_contracts.append(craig_name)
 
-candice_contracts = []
-for need in candice_needs:
-    if need == alice_profession:
-        candice_contracts.append(alice_name)
-    elif need == bob_profession:
-        candice_contracts.append(bob_name)
-    elif need == craig_profession:
-        candice_contracts.append(craig_name)
+class Specialist:
+    def __init__(self, name, profession):
+        self.name = name
+        self.profession = profession
 
-print("Alfred's contracts:", alfred_contracts)
-print("Bert's contracts:", bert_contracts)
-print("Candice's contracts:", candice_contracts)
+
+class Contract:
+    def __init__(self, homeowner, specialist):
+        self.homeowner = homeowner
+        self.specialist = specialist
+
+    def __str__(self):
+        return f"Homeowner: {self.homeowner.name}, Specialist: {self.specialist.name}"
+
+
+# Create homeowners
+alice = Homeowner("Alice Aliceville")
+bob = Homeowner("Bob Bobsville")
+craig = Homeowner("Craig Craigsville")
+alfred = Homeowner("Alfred Alfredson")
+bert = Homeowner("Bert Bertson")
+candice = Homeowner("Candice Candicedottir")
+
+# Create specialists
+alice_profession = Specialist("Alice Aliceville", "electrician")
+bob_profession = Specialist("Bob Bobsville", "painter")
+craig_profession = Specialist("Craig Craigsville", "plumber")
+
+# Set needs for homeowners
+alfred.needs = ["painter", "plumber"]
+bert.needs = ["plumber"]
+candice.needs = ["electrician", "painter"]
+
+# Create contracts
+contracts = []
+
+for homeowner in [alfred, bert, candice]:
+    for need in homeowner.needs:
+        if need == alice_profession.profession:
+            homeowner.add_contract(alice_profession)
+        elif need == bob_profession.profession:
+            homeowner.add_contract(bob_profession)
+        elif need == craig_profession.profession:
+            homeowner.add_contract(craig_profession)
+
+        # Additional logic for comparing and contracting the best offer
+        if homeowner.contracts:
+            best_offer = min(homeowner.contracts, key=lambda c: c.price)
+            contract = Contract(homeowner, best_offer)
+            contracts.append(contract)
+
+# Print contracts
+for contract in contracts:
+    print(contract)
