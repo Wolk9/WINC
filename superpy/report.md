@@ -26,16 +26,16 @@ SuperPy offers the following features:
 
 SuperPy provides a user-friendly command-line interface with clear descriptions of each argument. Here are some example commands:
 
+```
 python super.py buy --product-name orange --price 0.8 --expiration-date 2020-01-01
+```
 
-vbnet
-Copy code
 This command adds the product "orange" to the inventory with a purchase price of 0.8 and an expiration date of January 1, 2020.
 
+```
 python super.py report inventory --now
+```
 
-vbnet
-Copy code
 This command generates a report of the current inventory, including product names, quantities, purchase prices, and expiration dates.
 
 For a complete list of available commands and their descriptions, refer to the SuperPy tool's `--help` section.
