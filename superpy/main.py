@@ -66,11 +66,11 @@ def get_next_id(file_path):
     with open(file_path, "r") as file:
         reader = csv.reader(file)
         header = next(reader, None)  # Skip the header row
-        if header is None:
+        rows = list(reader)  # Read all rows into a list
+        if not rows:  # Check if the list is empty
             return 1  # Return 1 as the default ID if there are no rows
-        next_id = max(int(row[0]) for row in reader) + 1
+        next_id = max(int(row[0]) for row in rows) + 1
     return next_id
-
 
 
 def find_product_in_stock(product_name):
@@ -101,13 +101,14 @@ def get_inventory_report():
     return rows
 
 
-def get_revenue_report(date):
+def get_revenue_report(report_date):
     revenue = 0
     with open(SOLD_FILE, "r") as file:
         reader = csv.reader(file)
+        header = next(reader, None)  # Skip the header row
         for row in reader:
             sell_date = datetime.datetime.strptime(row[2], "%Y-%m-%d").date()
-            if sell_date == date:
+            if sell_date == report_date:
                 revenue += float(row[3])
     return revenue
 
